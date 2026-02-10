@@ -1,0 +1,5 @@
+module load miniconda3/24.1.2-py310
+
+conda create -n vep -c conda-forge -c bioconda ensembl-vep=112 -y
+conda activate vep
+vep --help | head
