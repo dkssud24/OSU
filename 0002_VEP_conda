@@ -1,5 +1,45 @@
+#step1
 module load miniconda3/24.1.2-py310
 
 conda create -n vep -c conda-forge -c bioconda ensembl-vep=112 -y
 conda activate vep
 vep --help | head
+
+mkdir -p $HOME/vep_cache
+export VEP_CACHE=$HOME/vep_cache
+
+vep_install -a cf -s homo_sapiens -y GRCh38 --CACHE_VERSION 112 -c $VEP_CACHE
+
+vep --help | head
+
+#step2
+in=AOU/PASS_PC10_Alzheimer_n_self_Fa_Ma_dementia_1to22X.regenie.sig7.3.annotated.tsv
+out=AOU/AD_proxy.vep_input.vcf
+
+(
+  echo "##fileformat=VCFv4.2"
+  echo "##source=AoU_regenie"
+  echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO"
+  awk 'BEGIN{FS=OFS="\t"} NR>1 {
+    chr=$1; pos=$2; id=$3; ref=$4; alt=$5;
+    print chr,pos,id,ref,alt,".","PASS","."
+  }' "$in"
+) > "$out"
+
+bgzip -f AOU/AD_proxy.vep_input.vcf
+tabix -p vcf AOU/AD_proxy.vep_input.vcf.gz
+
+#Important_VEP_command_line
+vep \
+  -i AOU/AD_proxy.vep_input.vcf.gz \
+  -o AOU/AD_proxy.vep.tsv \
+  --cache --offline \
+  --dir_cache $VEP_CACHE \
+  --assembly GRCh38 \
+  --tab \
+  --symbol --gene_phenotype \
+  --canonical --mane \
+  --protein --hgvs --hgvsg \
+  --pick \
+  --pick_order mane_select,mane_plus_clinical,canonical,appris,tsl,rank \
+  --fork 4
