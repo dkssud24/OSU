@@ -46,8 +46,8 @@ tabix -p vcf variable2.vcf.gz
 
 #Important_VEP_command_line
 vep \
-  -i AD_proxy.vep_input.rare.vcf.gz \
-  -o AD_proxy.rare.vep.tsv \
+  -i variable2.vcf.gz \
+  -o final.outcome.vep.tsv \
   --cache --offline \
   --dir_cache $VEP_CACHE \
   --assembly GRCh38 \
