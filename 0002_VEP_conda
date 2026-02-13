@@ -41,8 +41,8 @@ out=outcome.vcf
   }' "$in"
 ) > "$out"
 
-bgzip -f AD_proxy.vep_input.rare.vcf
-tabix -p vcf AD_proxy.vep_input.rare.vcf.gz
+bgzip -f variable1.vcf
+tabix -p vcf variable2.vcf.gz
 
 #Important_VEP_command_line
 vep \
