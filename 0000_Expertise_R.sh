@@ -4,4 +4,3 @@ module load R/4.5.2
 R --version
 
 
-/fs/ess/PAS1501/gaolab/haeun/
