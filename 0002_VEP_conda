@@ -30,7 +30,7 @@ bgzip -f AOU/AD_proxy.vep_input.vcf
 tabix -p vcf AOU/AD_proxy.vep_input.vcf.gz
 
 #step2_rare
-in=PASS_PC10_Alzheimer_n_self_Fa_Ma_dementia_1to22X.regenie.sig7.3.annotated.tsv.rare
+in=input.tsv.rare
 out=AD_proxy.vep_input.rare.vcf
 
 (
