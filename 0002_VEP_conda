@@ -13,7 +13,7 @@ vep_install -a cf -s homo_sapiens -y GRCh38 --CACHE_VERSION 112 -c $VEP_CACHE
 vep --help | head
 
 #step2_common
-in=input.tsv
+in=in=input.tsv.rare
 out=outcome.vcf
 
 (
