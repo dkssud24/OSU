@@ -33,8 +33,7 @@ in=input.tsv.rare
 out=outcome.vcf
 
 (
-  echo "##fileformat=VCFv4.2"
-  echo "##source=AoU_regenie"
+  
   echo -e "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO"
   awk 'BEGIN{FS=OFS="\t"} NR>1 {
     chr=$1; pos=$2; id=$3; ref=$4; alt=$5;
