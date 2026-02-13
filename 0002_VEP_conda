@@ -25,8 +25,8 @@ out=outcome.vcf
   }' "$in"
 ) > "$out"
 
-bgzip -f AOU/AD_proxy.vep_input.vcf
-tabix -p vcf AOU/AD_proxy.vep_input.vcf.gz
+bgzip -f variable1.vcf
+tabix -p vcf variable2.vcf.gz
 
 #step2_rare
 in=input.tsv.rare
